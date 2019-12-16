@@ -1,0 +1,31 @@
+# Internal
+
+Internal is a curated set of high-quality node modules.
+
+Each module in this repository has the following requirements
+
+- Well-tested
+- Small footprint
+- Small API surface
+- Works on both client and server (stubs are ok)
+- Good documentation
+
+At it's best, this repository simply pulls in other modules I've curated over the years. Occassionally there may be some freshly brewed code.
+
+## Usage
+
+```sh
+yarn add internal
+// or
+yarn add internal-fetch
+```
+
+## Usage
+
+```
+import fetch from 'internal/fetch'
+```
+
+## License
+
+MIT
