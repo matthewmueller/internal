@@ -11,7 +11,7 @@ Each module in this repository has the following requirements
 - Good documentation
 - Provides type definitions
 
-At it's best, this repository simply pulls in other modules I've curated over the years. Occassionally there may be some freshly brewed code.
+At it's best, this repository simply pulls in other modules. Occassionally there may be some freshly brewed code.
 
 ## Usage
 
