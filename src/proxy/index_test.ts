@@ -6,7 +6,8 @@ describe('proxy', () => {
   describe('object', () => {
     it('should work with simple objects', done => {
       let called = 0
-      const state = Proxy({ a: 'b' }, () => called++)
+      const state = Proxy({ a: 'b' })
+      state.subscribe(() => called++)
       assert.equal(state.a, 'b')
       state.a = 'a'
       assert.equal(state.a, 'a')
@@ -20,7 +21,8 @@ describe('proxy', () => {
   describe('array', () => {
     it('should work with simple arrays', done => {
       let called = 0
-      const state = Proxy<string[]>([], () => called++)
+      const state = Proxy<string[]>([])
+      state.subscribe(() => called++)
       state.push('a', 'b')
       assert.equal(state.length, 2)
       assert.equal(state[0], 'a')
@@ -37,7 +39,8 @@ describe('proxy', () => {
     it('should work with arrays of objects', done => {
       let called = 0
       type State = { tabs: { active: boolean }[] }
-      const state = Proxy<State>({ tabs: [] }, () => called++)
+      const state = Proxy<State>({ tabs: [] })
+      state.subscribe(() => called++)
       assert.equal(state.tabs.length, 0)
       state.tabs.push({ active: true })
       assert.equal(state.tabs.length, 1)
@@ -47,7 +50,7 @@ describe('proxy', () => {
       assert.notEqual(tab, undefined)
       assert.equal(tab?.active, true)
       raf(() => {
-        assert.equal(called, 2)
+        assert.equal(called, 1)
         done()
       })
     })
