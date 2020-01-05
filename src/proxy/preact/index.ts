@@ -3,7 +3,7 @@ import { Proxy } from '..'
 
 export default function connect<S>(proxy: Proxy<S>, component: ComponentChild): ComponentChild {
   class Subscriber extends Component<{}, {}> {
-    update() {
+    update = () => {
       this.forceUpdate()
     }
     componentDidMount() {

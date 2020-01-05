@@ -54,5 +54,16 @@ describe('proxy', () => {
         done()
       })
     })
+
+    it('JSON.stringify should return the original object', () => {
+      type State = { frames: { type: string }[] }
+      const state = Proxy<State>({ frames: [] })
+      state.frames.push({ type: 'a' })
+      state.frames.push({ type: 'b' })
+      state.frames.push({ type: 'c' })
+      console.log(JSON.stringify(state.frames))
+      assert.ok(true === Array.isArray(JSON.parse(JSON.stringify(state.frames))))
+      assert.deepEqual(JSON.parse(JSON.stringify(state.frames)), [{ type: 'a' }, { type: 'b' }, { type: 'c' }])
+    })
   })
 })
