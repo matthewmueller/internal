@@ -1,9 +1,10 @@
 {
   "name": "internal",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "files": [
-    "dist/**/index.js",
-    "dist/**/index.d.ts"
+    "**/index.mjs",
+    "**/index.js",
+    "**/index.d.ts"
   ],
   "license": "MIT",
   "devDependencies": {
