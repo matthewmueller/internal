@@ -299,7 +299,7 @@ describe('assert', function() {
         throw new Error('fail')
       } catch (e) {
         if ('fail' == e.message) throw e
-        if ('Expected function () { } to throw an error.' != e.message)
+        if ('Expected function() {} to throw an error.' != e.message)
           throw new Error('fail')
       }
     })
@@ -343,9 +343,9 @@ describe('assert', function() {
         throw new Error('fail')
       } catch (e) {
         if ('fail' == e.message) throw e
-        const expect = `Expected function () {
-                      throw new Error();
-                  } not to throw an error.`
+        const expect = `Expected function() {
+            throw new Error()
+          } not to throw an error.`
         if (expect != e.message) throw new Error('fail')
       }
     })

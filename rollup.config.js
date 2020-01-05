@@ -4,9 +4,7 @@ import glob from 'globby'
 import path from 'path'
 
 const tests = glob.sync([path.join('src', '**', 'index_test.{t,j}s')])
-const modules = glob
-  .sync([path.join('src', '**', 'index.{t,j}s')])
-  .filter(isPublic)
+const modules = glob.sync([path.join('src', '**', 'index.{t,j}s')]).filter(isPublic)
 
 function isPublic(m) {
   return !~m.indexOf('internal/')
@@ -19,6 +17,9 @@ function dist(m) {
   const rest = parts.slice(1)
   return path.join(...['dist'].concat(rest))
 }
+
+const pkg = require('./package.json')
+const deps = Object.keys(pkg.dependencies)
 
 export default [
   ...modules.map(m => ({
@@ -35,7 +36,7 @@ export default [
         transforms: ['typescript'],
       }),
     ],
-    external: ['preact'],
+    external: m.concat(deps),
     output: {
       name: path.basename(m, path.extname(m)),
       file: dist(m),

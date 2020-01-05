@@ -27,6 +27,20 @@ yarn add internal-fetch
 import fetch from 'internal/fetch'
 ```
 
+## What happened to the original `internal`?
+
+The code for the original `internal` lives under the `1.x` versions. You can fix this by adjusting your dependencies in the following way:
+
+```json
+{
+  "dependencies": {
+    "internal": "1.x"
+  }
+}
+```
+
+I'm sorry in advance if I've caused any inconvenience with this transition.
+
 ## License
 
 MIT
