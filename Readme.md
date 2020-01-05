@@ -17,14 +17,12 @@ At it's best, this repository simply pulls in other modules. Occassionally there
 
 ```sh
 yarn add internal
-// or
-yarn add internal-fetch
 ```
 
 ## Usage
 
 ```
-import fetch from 'internal/fetch'
+import proxy from 'internal/proxy'
 ```
 
 ## What happened to the original `internal`?
