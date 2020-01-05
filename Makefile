@@ -1,3 +1,5 @@
+precommit: rollup.compile tsc.check
+
 rollup.compile:
 	@ ./node_modules/.bin/rollup -c
 
