@@ -1,6 +1,5 @@
 import nodeResolve from '@rollup/plugin-node-resolve'
-import typescript from '@rollup/plugin-typescript'
-import commonjs from '@rollup/plugin-commonjs'
+import sucrase from '@rollup/plugin-sucrase'
 import glob from 'globby'
 import path from 'path'
 
@@ -31,11 +30,12 @@ export default [
         mainFields: ['jsnext', 'module', 'browser', 'main'],
         preferBuiltins: false,
       }),
-      commonjs(),
-      typescript({
-        tsconfig: path.join(__dirname, 'tsconfig.json'),
+      sucrase({
+        exclude: [path.join('node_modules', '**')],
+        transforms: ['typescript'],
       }),
     ],
+    external: ['preact'],
     output: {
       name: path.basename(m, path.extname(m)),
       file: dist(m),
@@ -51,12 +51,11 @@ export default [
         mainFields: ['jsnext', 'module', 'browser', 'main'],
         preferBuiltins: false,
       }),
-      commonjs(),
-      typescript({
-        tsconfig: path.join(__dirname, 'tsconfig.json'),
+      sucrase({
+        exclude: [path.join('node_modules', '**')],
+        transforms: ['typescript'],
       }),
     ],
-    // external: Module.builtinModules,
     output: {
       name: path.basename(m, path.extname(m)),
       file: dist(m),

@@ -3,3 +3,6 @@ rollup.compile:
 
 rollup.watch:
 	@ ./node_modules/.bin/rollup -c -w
+
+tsc.check:
+	@ ./node_modules/.bin/tsc

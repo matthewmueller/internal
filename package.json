@@ -1,18 +1,21 @@
 {
   "name": "internal",
   "version": "1.0.0",
-  "main": "index.js",
+  "files": [
+    "dist/**/index.js",
+    "dist/**/index.d.ts"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "11.0.1",
     "@rollup/plugin-node-resolve": "6.1.0",
+    "@rollup/plugin-sucrase": "3.0.0",
     "@rollup/plugin-typescript": "2.0.2",
     "@types/assert": "1.4.3",
     "@types/chai": "4.2.7",
     "@types/jsdom": "12.2.4",
     "@types/mocha": "5.2.7",
     "assert": "2.0.0",
-    "chai": "4.2.0",
     "globby": "10.0.1",
     "jsdom": "15.2.1",
     "mocha": "7.0.0",
