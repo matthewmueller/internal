@@ -2,5 +2,29 @@
   "name": "internal",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "11.0.1",
+    "@rollup/plugin-node-resolve": "6.1.0",
+    "@rollup/plugin-typescript": "2.0.2",
+    "@types/assert": "1.4.3",
+    "@types/chai": "4.2.7",
+    "@types/jsdom": "12.2.4",
+    "@types/mocha": "5.2.7",
+    "assert": "2.0.0",
+    "chai": "4.2.0",
+    "globby": "10.0.1",
+    "jsdom": "15.2.1",
+    "mocha": "7.0.0",
+    "rollup": "1.27.14",
+    "rollup-plugin-node-resolve": "5.2.0",
+    "rollup-plugin-typescript2": "0.25.3",
+    "typescript": "3.7.4",
+    "window": "4.2.6"
+  },
+  "dependencies": {
+    "@rollup/plugin-alias": "3.0.0",
+    "preact": "10.1.1",
+    "rollup-plugin-commonjs": "10.1.0"
+  }
 }

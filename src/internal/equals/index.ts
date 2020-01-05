@@ -1,0 +1,125 @@
+import type from '../type'
+
+// (any, any, [array]) -> boolean
+function equal(a: any, b: any, memos?: any[]): boolean {
+  // All identical values are equivalent
+  if (a === b) return true
+  const fnA = types[type(a)]
+  const fnB = types[type(b)]
+  return fnA && fnA === fnB ? fnA(a, b, memos) : false
+}
+
+const types: { [key: string]: any } = {}
+
+// (Number) -> boolean
+types.number = function(a: number, b: number): boolean {
+  return a !== a && b !== b /*Nan check*/
+}
+
+// (function, function, array) -> boolean
+types['function'] = function(
+  a: Function,
+  b: Function,
+  memos: Function[]
+): boolean {
+  return (
+    a.toString() === b.toString() &&
+    // Functions can act as objects
+    types.object(a, b, memos) &&
+    equal(a.prototype, b.prototype)
+  )
+}
+
+// (date, date) -> boolean
+types.date = function(a: Date, b: Date): boolean {
+  return +a === +b
+}
+
+// (regexp, regexp) -> boolean
+types.regexp = function(a: RegExp, b: RegExp): boolean {
+  return a.toString() === b.toString()
+}
+
+// (DOMElement, DOMElement) -> boolean
+types.element = function(a: Element, b: Element): boolean {
+  return a.outerHTML === b.outerHTML
+}
+
+// (textnode, textnode) -> boolean
+types.textnode = function(a: Node, b: Node): boolean {
+  return a.textContent === b.textContent
+}
+
+// decorate `fn` to prevent it re-checking objects
+// (function) -> function
+function memoGuard(fn: any) {
+  return function(a: any, b: any, memos: any[]) {
+    if (!memos) return fn(a, b, [])
+    var i = memos.length,
+      memo
+    while ((memo = memos[--i])) {
+      if (memo[0] === a && memo[1] === b) return true
+    }
+    return fn(a, b, memos)
+  }
+}
+
+types['arguments'] = types['bit-array'] = types.array = memoGuard(arrayEqual)
+
+// (array, array, array) -> boolean
+function arrayEqual(a: any[], b: any[], memos: [any, any][]): boolean {
+  var i = a.length
+  if (i !== b.length) return false
+  memos.push([a, b])
+  while (i--) {
+    if (!equal(a[i], b[i], memos)) return false
+  }
+  return true
+}
+
+types.object = memoGuard(objectEqual)
+
+// (object, object, array) -> boolean
+function objectEqual(a: any, b: any, memos: any[]) {
+  if (typeof a.equal == 'function') {
+    memos.push([a, b])
+    return a.equal(b, memos)
+  }
+  var ka = getEnumerableProperties(a)
+  var kb = getEnumerableProperties(b)
+  var i = ka.length
+
+  // same number of properties
+  if (i !== kb.length) return false
+
+  // although not necessarily the same order
+  ka.sort()
+  kb.sort()
+
+  // cheap key test
+  while (i--) if (ka[i] !== kb[i]) return false
+
+  // remember
+  memos.push([a, b])
+
+  // iterate again this time doing a thorough check
+  i = ka.length
+  while (i--) {
+    var key = ka[i]
+    if (!equal(a[key], b[key], memos)) return false
+  }
+
+  return true
+}
+
+// (object) -> array
+const getEnumerableProperties = (object: Object) => {
+  const result = []
+  for (var k in object)
+    if (k !== 'constructor') {
+      result.push(k)
+    }
+  return result
+}
+
+export default equal
