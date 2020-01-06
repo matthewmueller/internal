@@ -3,25 +3,36 @@ import Store from './'
 
 describe('store', () => {
   it('setState(obj)', done => {
-    const store = new Store<{ n: number }>({ n: 0 })
+    type State = { n: number }
+    const store = Store<State>({ n: 0 })
     store.subscribe(() => {
-      assert.deepEqual(store.state, { n: 1 })
+      assert.deepEqual(store.toJSON(), { n: 1 })
       done()
     })
-    store.set({ n: 1 })
+    store.setState({ n: 1 })
   })
 
   it('setState(fn)', done => {
-    const store = new Store<{ n: number }>({ n: 0 })
+    type State = { n: number }
+    const store = Store<State>({ n: 0 })
     store.subscribe(() => {
-      assert.deepEqual(store.state, { n: 1 })
+      assert.deepEqual(store.toJSON(), { n: 1 })
       done()
     })
-    store.set(s => ({ n: s.n + 1 }))
+    store.setState(s => ({ n: s.n + 1 }))
   })
 
   it('get(key)', () => {
-    const store = new Store<{ n: number }>({ n: 0 })
-    assert.deepEqual(store.get('n'), 0)
+    type State = { n: number }
+    const store = Store<State>({ n: 0 })
+    assert.deepEqual(store.n, 0)
+  })
+
+  it('get(unknown)', () => {
+    type State = { n: number | undefined }
+    const store = Store<State>({ n: undefined })
+    assert.deepEqual(store.n, undefined)
+    store.setState({ n: 1 })
+    assert.deepEqual(store.n, 1)
   })
 })

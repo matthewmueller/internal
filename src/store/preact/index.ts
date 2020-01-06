@@ -1,25 +1,20 @@
 import { h, Component, ComponentChild } from 'preact'
-import Store from '../index'
+import { Store } from '..'
 
-export default function connect<S>(store: Store<S>, component: ComponentChild) {
-  return h(
-    class C extends Component {
-      update = () => {
-        this.forceUpdate()
-      }
-
-      componentDidMount() {
-        store.subscribe(this.update)
-      }
-
-      componentWillUnmount() {
-        store.unsubscribe(this.update)
-      }
-
-      render(): ComponentChild {
-        return component
-      }
-    },
-    {}
-  )
+export default function connect<S>(store: Store<S>, render: () => ComponentChild): ComponentChild {
+  class Subscriber extends Component<{}, {}> {
+    update = () => {
+      this.forceUpdate()
+    }
+    componentDidMount() {
+      store.subscribe(this.update)
+    }
+    componentWillUnmount() {
+      store.unsubscribe(this.update)
+    }
+    render(): ComponentChild {
+      return render()
+    }
+  }
+  return h(Subscriber, {})
 }

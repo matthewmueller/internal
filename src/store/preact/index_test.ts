@@ -1,13 +1,29 @@
 import { h, render } from 'preact'
 import assert from '../../assert'
+import subscribe from './'
+import Store from '../'
 
-describe('connect', () => {
+describe('store/preact', () => {
+  let root: HTMLElement
   beforeEach(() => {
-    document.body.innerHTML = ''
+    const tmp = document.getElementById('store/preact')
+    if (tmp) {
+      tmp.parentNode?.removeChild(tmp)
+    }
+    root = document.createElement('div')
+    root.id = 'store/preact'
   })
 
-  it('should render once', () => {
-    render(h('div', {}, 'hello world'), document.body)
-    assert.ok(true)
+  it('subscribe(store, fn)', done => {
+    type State = { message: string }
+    const store = Store<State>({ message: 'hello' })
+    const fn = () => h('div', {}, store.message)
+    render(subscribe(store, fn), root)
+    assert.equal(root.innerHTML, '<div>hello</div>')
+    store.setState({ message: 'bonjour' })
+    setTimeout(() => {
+      assert.equal(root.innerHTML, '<div>bonjour</div>')
+      done()
+    }, 0)
   })
 })
