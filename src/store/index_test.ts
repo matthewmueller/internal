@@ -22,6 +22,13 @@ describe('store', () => {
     store.setState(s => ({ n: s.n + 1 }))
   })
 
+  // it('deep set', done => {
+  //   type State = { n: { a: string[]; obj: { a: string } } }
+  //   const store = Store<State>({ n: { a: [], obj: { a: '' } } })
+  //   done()
+  //   // store.setState(s => ({ n: s.n + 1 }))
+  // })
+
   it('get(key)', () => {
     type State = { n: number }
     const store = Store<State>({ n: 0 })
