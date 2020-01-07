@@ -44,18 +44,22 @@ function proxy<State extends Object>(target: State): Proxy<State> {
   })
 }
 
+// add toValue
+// TODO: in the future, we may want to be more clever
+proxy.toValue = function<State>(proxy: Proxy<State>): State {
+  return JSON.parse(JSON.stringify(proxy))
+}
+
 // recursive and responsible for the proxying
 function proxy2<State extends Object>(state: State, trigger: () => void): State {
   return new Proxy(state, {
-    set: function(target, property, value) {
-      // @ts-ignore
-      target[property] = value
+    set: function(target, property, value, receiver) {
+      Reflect.set(target, property, value, receiver)
       trigger()
       return true
     },
-    get: function(target, property) {
-      // @ts-ignore
-      const value = target[property]
+    get: function(target, property, receiver) {
+      const value = Reflect.get(target, property, receiver)
       if (typeof value === 'object') {
         return proxy2(value, trigger)
       }

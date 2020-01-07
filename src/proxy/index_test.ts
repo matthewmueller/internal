@@ -64,5 +64,16 @@ describe('proxy', () => {
       assert.ok(true === Array.isArray(JSON.parse(JSON.stringify(state.frames))))
       assert.deepEqual(JSON.parse(JSON.stringify(state.frames)), [{ type: 'a' }, { type: 'b' }, { type: 'c' }])
     })
+
+    it('Proxy.toValue(proxy)', () => {
+      type State = { frames: { type: string }[] }
+      const state = Proxy<State>({
+        frames: [],
+      })
+      state.frames.push({ type: 'a' })
+      state.frames.push({ type: 'b' })
+      state.frames.push({ type: 'c' })
+      assert.deepEqual(Proxy.toValue(state), { frames: [{ type: 'a' }, { type: 'b' }, { type: 'c' }] })
+    })
   })
 })
