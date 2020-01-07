@@ -2,26 +2,26 @@ import raf from '../../internal/raf'
 import { h, render } from 'preact'
 import assert from '../../assert'
 import subscribe from './'
-import Store from '../'
+import Proxy from '../'
 
-describe('store/preact', () => {
+describe('proxy/preact', () => {
   let root: HTMLElement
   beforeEach(() => {
-    const tmp = document.getElementById('store/preact')
+    const tmp = document.getElementById('proxy/preact')
     if (tmp) {
       tmp.parentNode?.removeChild(tmp)
     }
     root = document.createElement('div')
-    root.id = 'store/preact'
+    root.id = 'proxy/preact'
   })
 
-  it('subscribe(store, fn)', done => {
+  it('subscribe(proxy, fn)', done => {
     type State = { message: string }
-    const store = Store<State>({ message: 'hello' })
-    const fn = () => h('div', {}, store.message)
-    render(subscribe(store, fn), root)
+    const proxy = Proxy<State>({ message: 'hello' })
+    const fn = () => h('div', {}, proxy.message)
+    render(subscribe(proxy, fn), root)
     assert.equal(root.innerHTML, '<div>hello</div>')
-    store.setState({ message: 'bonjour' })
+    proxy.message = 'bonjour'
     raf(() => {
       assert.equal(root.innerHTML, '<div>bonjour</div>')
       done()

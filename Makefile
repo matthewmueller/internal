@@ -5,6 +5,10 @@ endif
 include github.com/matthewmueller/make/all.mk
 
 precommit: rollup.compile tsc.check
+prepublish: clean.dist rollup.compile tsc.check
+
+clean.dist:
+	@ rm -rf dist
 
 rollup.compile:
 	@ ./node_modules/.bin/rollup -c
@@ -18,7 +22,7 @@ tsc.check:
 serve:
 	@ ./node_modules/.bin/serve
 
-publish: rollup.compile bin.yarn bin.node bin.jq env.NPM_TOKEN
+publish: prepublish bin.yarn bin.node bin.jq env.NPM_TOKEN
 	@ echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
 	@ cp package.json dist/
 	@ if [ "$(shell yarn info -s $(shell jq '.name' < package.json) version)" != "$(shell jq .version < package.json)" ]; then \
