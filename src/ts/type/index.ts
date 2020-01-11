@@ -22,8 +22,10 @@ export type Immutable<T> = T extends Builtin
 
 // Support a JSON type
 // https://github.com/microsoft/TypeScript/issues/1897#issuecomment-338650717
-export type Json = boolean | number | string | null | JsonArray | JsonMap
-interface JsonMap {
-  [key: string]: Json
+export namespace Json {
+  export type Literal = boolean | number | string | null | Array | Object
+  export type Object = {
+    [key: string]: Literal
+  }
+  export type Array = Literal[]
 }
-interface JsonArray extends Array<Json> {}
