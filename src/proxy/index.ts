@@ -46,8 +46,8 @@ function proxy<State extends Object>(target: State): Proxy<State> {
 
 // add toValue
 // TODO: in the future, we may want to be more clever
-proxy.toValue = function<State>(proxy: Proxy<State>): State {
-  return JSON.parse(JSON.stringify(proxy))
+proxy.toValue = function<Value>(proxied: Value): Value {
+  return JSON.parse(JSON.stringify(proxied))
 }
 
 // recursive and responsible for the proxying
