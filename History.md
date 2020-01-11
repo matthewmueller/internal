@@ -1,3 +1,7 @@
+# 2.0.16 / 2020-01-12
+
+- add internal/error/ensure and maybe packages
+
 # 2.0.15 / 2020-01-11
 
 - ts/type: use namespace for json
