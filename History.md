@@ -1,3 +1,7 @@
+# 2.0.15 / 2020-01-11
+
+- ts/type: use namespace for json
+
 # 2.0.14 / 2020-01-11
 
 - add clone<T>(t: T): T. add Json typescript type
