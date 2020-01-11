@@ -19,3 +19,11 @@ export type Immutable<T> = T extends Builtin
   : T extends {}
   ? { readonly [K in keyof T]: Immutable<T[K]> }
   : Readonly<T>
+
+// Support a JSON type
+// https://github.com/microsoft/TypeScript/issues/1897#issuecomment-338650717
+export type Json = boolean | number | string | null | JsonArray | JsonMap
+interface JsonMap {
+  [key: string]: Json
+}
+interface JsonArray extends Array<Json> {}
