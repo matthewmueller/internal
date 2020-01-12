@@ -50,10 +50,20 @@ function set(name: string, value: string | null, options?: Options) {
 
 /**
  * Return all cookies.
+ *
+ * This is isomorphic and may be called
+ * from the server-side though it will
+ * return nothing.
  */
 
 function all(): Cookies {
-  return parse(document.cookie)
+  var str
+  try {
+    str = document.cookie
+  } catch (err) {
+    return {}
+  }
+  return parse(str)
 }
 
 /**
