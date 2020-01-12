@@ -1,3 +1,7 @@
+# 2.0.17 / 2020-01-12
+
+- add cookie implementation
+
 # 2.0.16 / 2020-01-12
 
 - add internal/error/ensure and maybe packages
