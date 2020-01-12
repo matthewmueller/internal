@@ -1,3 +1,7 @@
+# 2.0.18 / 2020-01-12
+
+- make cookie.all() isomorphic
+
 # 2.0.17 / 2020-01-12
 
 - add cookie implementation

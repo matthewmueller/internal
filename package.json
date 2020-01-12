@@ -1,6 +1,6 @@
 {
   "name": "internal",
-  "version": "2.0.17",
+  "version": "2.0.18",
   "files": [
     "**/index.mjs",
     "**/index.js",
