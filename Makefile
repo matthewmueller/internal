@@ -26,7 +26,7 @@ publish: prepublish bin.yarn bin.node bin.jq env.NPM_TOKEN
 	@ echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
 	@ cp package.json dist/
 	@ if [ "$(shell yarn info -s $(shell jq '.name' < package.json) version)" != "$(shell jq .version < package.json)" ]; then \
-			cd dist/ && yarn publish; \
+			cd dist/ && yarn publish --non-interactive; \
 		fi
 	@ rm dist/package.json
 	@ rm .npmrc
