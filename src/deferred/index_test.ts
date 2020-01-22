@@ -24,29 +24,33 @@ describe('deferred', () => {
   it('should then', done => {
     const deferred = new Deferred()
     const err = new Error('oh noz')
-    deferred.resolve(err)
     deferred.then(e => {
       assert.equal(e, err)
       done()
     })
+    deferred.resolve(err)
   })
 
   it('should catch', done => {
     const deferred = new Deferred()
     const err = new Error('oh noz')
-    deferred.reject(err)
     deferred.catch(e => {
       assert.equal(e, err)
       done()
     })
+    deferred.reject(err)
   })
 
   it('should finally', done => {
     const deferred = new Deferred()
     const err = new Error('oh noz')
+    deferred
+      .catch(e => {
+        assert.equal(e, err)
+      })
+      .finally(() => {
+        done()
+      })
     deferred.reject(err)
-    deferred.finally(() => {
-      done()
-    })
   })
 })
