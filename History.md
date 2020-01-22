@@ -1,3 +1,7 @@
+# 2.0.19 / 2020-01-22
+
+- add internal/domify
+
 # 2.0.18 / 2020-01-12
 
 - make cookie.all() isomorphic
