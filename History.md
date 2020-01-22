@@ -1,3 +1,8 @@
+# 2.0.20 / 2020-01-22
+
+- add deferred
+- add --non-interative to make publish
+
 # 2.0.19 / 2020-01-22
 
 - add internal/domify
