@@ -1,3 +1,7 @@
+# 2.0.21 / 2020-01-23
+
+- add load/script module, turn our test suite into an express server
+
 # 2.0.20 / 2020-01-22
 
 - add deferred
