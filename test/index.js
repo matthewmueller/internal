@@ -6,14 +6,14 @@ const app = express()
 const root = path.join(__dirname, '..')
 const glob = 'dist/**/*_test.js'
 
-// load/script test helpers
-app.get('/load/script/hello.js', (req, res) => {
+// async/script test helpers
+app.get('/async/script/hello.js', (req, res) => {
   res
     .status(200)
     .type('js')
     .send(`log('Hello world')`)
 })
-app.get('/load/script/throw.js', (req, res) => {
+app.get('/async/script/throw.js', (req, res) => {
   res
     .status(200)
     .type('js')
