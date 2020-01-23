@@ -1,3 +1,7 @@
+# 2.0.22 / 2020-01-24
+
+- add channels, rename load/script to async/script
+
 # 2.0.21 / 2020-01-23
 
 - add load/script module, turn our test suite into an express server
