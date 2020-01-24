@@ -1,3 +1,7 @@
+# 2.0.23 / 2020-01-24
+
+- fix deploy
+
 # 2.0.22 / 2020-01-24
 
 - add channels, rename load/script to async/script
