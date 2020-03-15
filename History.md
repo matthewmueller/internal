@@ -1,3 +1,7 @@
+# 2.0.25 / 2020-03-15
+
+- async/script: append to body by default, add test
+
 # 2.0.24 / 2020-01-26
 
 - add backoff
