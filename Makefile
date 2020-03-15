@@ -22,11 +22,11 @@ tsc.check:
 serve:
 	@ ./node_modules/.bin/serve
 
-publish: prepublish bin.yarn bin.node bin.jq env.NPM_TOKEN
+publish: prepublish bin.npm bin.node bin.jq env.NPM_TOKEN
 	@ echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
 	@ cp package.json dist/
-	@ if [ "$(shell yarn info -s $(shell jq '.name' < package.json) version)" != "$(shell jq .version < package.json)" ]; then \
-			cd dist/ && yarn publish --non-interactive; \
+	@ if [ $(shell npm info --json $(shell jq -r '.name' < package.json) version) != $(shell jq .version < package.json) ]; then \
+			PUBLISH=1 npm publish dist/; \
 		fi
 	@ rm dist/package.json
 	@ rm .npmrc

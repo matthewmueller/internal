@@ -23,8 +23,17 @@
   "dependencies": {
     "preact": "10.1.1"
   },
+  "dir": "dist/",
+  "config": {
+    "dir": "dist/",
+    "cwd": "dist/",
+    "root": "dist/"
+  },
+  "publishConfig": {
+    "cwd": "dist/"
+  },
   "scripts": {
-    "prepublishOnly": "make prepublish"
+    "prepublishOnly": "[[ -z \"$PUBLISH\" ]] && { echo \"Refusing to publish. Run 'make publish' instead.\"; exit 1; } || exit 0;"
   },
   "prettier": {
     "trailingComma": "es5",
