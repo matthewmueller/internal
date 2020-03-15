@@ -1,3 +1,8 @@
+# 2.0.26 / 2020-03-15
+
+- switch to npm
+- add prepublish script
+
 # 2.0.25 / 2020-03-15
 
 - async/script: append to body by default, add test

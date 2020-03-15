@@ -1,6 +1,6 @@
 {
   "name": "internal",
-  "version": "2.0.25",
+  "version": "2.0.26",
   "files": [
     "**/index.mjs",
     "**/index.js",
@@ -22,6 +22,9 @@
   },
   "dependencies": {
     "preact": "10.1.1"
+  },
+  "scripts": {
+    "prepublishOnly": "make prepublish"
   },
   "prettier": {
     "trailingComma": "es5",
