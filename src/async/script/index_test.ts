@@ -18,6 +18,22 @@ describe('async/script', () => {
     })
   })
 
+  it('success', function(done) {
+    async('async/script/hello.js', function(err) {
+      assert.equal(err, null)
+      assert.equal(last_msg, 'Hello world')
+      last_msg = ''
+      const scripts = document.body.querySelectorAll('script')
+      for (let i = 0; i < scripts.length; i++) {
+        if (scripts[i].getAttribute('src') === 'async/script/hello.js') {
+          done()
+          return
+        }
+      }
+      done(new Error('script not found'))
+    })
+  })
+
   it('opts.async', function(done) {
     async('async/script/hello.js', { async: false }, function(err, script) {
       assert.equal(err, null)

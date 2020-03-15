@@ -31,7 +31,7 @@ type Callback = (err: Error | null, script: HTMLScriptElement) => void
 function load(src: string, opts: Options, cb: Callback): void
 function load(src: string, opts: Callback, cb: void): void
 function load(src: any, opts: any, cb: any): void {
-  var head = document.head || document.getElementsByTagName('head')[0]
+  var parent = document.body || document.head || document.documentElement
   var script = document.createElement('script')
   if (typeof opts === 'function') {
     cb = opts
@@ -64,7 +64,8 @@ function load(src: any, opts: any, cb: any): void {
     onEnd(script, cb)
   }
 
-  head.appendChild(script)
+  // append script
+  parent.appendChild(script)
 }
 
 /**
