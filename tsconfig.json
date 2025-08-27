@@ -31,5 +31,5 @@
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*.ts", "src/_assert/index.js"]
+  "include": ["src/**/*.ts", "src/_assert/index.js", "src/state/index_test.js", "src/state/index.js"]
 }
