@@ -1,4 +1,4 @@
-export default function makeError(input: any): Error {
+export default function ensureError(input: any): Error {
   if (!(input instanceof Error)) {
     return new NonError(input)
   }
