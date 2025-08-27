@@ -1,46 +1,40 @@
 {
   "name": "internal",
-  "version": "2.0.27",
-  "files": [
-    "**/index.mjs",
-    "**/index.js",
-    "**/index.d.ts"
-  ],
+  "version": "3.0.0",
+  "description": "Browser toolbox for building robust applications",
+  "keywords": [],
+  "scripts": {
+    "test": "make test",
+    "build": "make build",
+    "prepublishOnly": "[[ -z \"$PUBLISH\" ]] && { echo \"Refusing to publish. Run 'make publish' instead.\"; exit 1; } || exit 0;"
+  },
+  "author": "Matt Mueller",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "11.0.1",
-    "@rollup/plugin-node-resolve": "6.1.0",
-    "@rollup/plugin-sucrase": "3.0.0",
-    "@types/assert": "1.4.3",
-    "@types/mocha": "5.2.7",
-    "express": "4.17.1",
-    "globby": "11.0.0",
-    "mocha": "7.0.0",
-    "rollup": "1.27.14",
-    "serve": "11.3.0",
-    "typescript": "3.7.4"
+    "@vitest/coverage-v8": "3.2.4",
+    "jsdom": "26.1.0",
+    "prettier": "3.6.2",
+    "tsup": "8.5.0",
+    "typescript": "5.9.2",
+    "vitest": "3.2.4"
   },
-  "dependencies": {
-    "preact": "10.1.1"
-  },
-  "dir": "dist/",
-  "config": {
-    "dir": "dist/",
-    "cwd": "dist/",
-    "root": "dist/"
-  },
-  "publishConfig": {
-    "cwd": "dist/"
-  },
-  "scripts": {
-    "prepublishOnly": "[[ -z \"$PUBLISH\" ]] && { echo \"Refusing to publish. Run 'make publish' instead.\"; exit 1; } || exit 0;"
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
+    },
+    "./*": {
+      "import": "./dist/*/index.mjs",
+      "types": "./dist/*/index.d.mts"
+    }
   },
   "prettier": {
     "trailingComma": "es5",
     "tabWidth": 2,
     "semi": false,
-    "singleQuote": true,
-    "printWidth": 240,
-    "jsxBracketSameLine": true
+    "printWidth": 240
   }
 }

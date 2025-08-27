@@ -1,32 +1,21 @@
-# Automatically install & include https://github.com/matthewmueller/make
-ifeq ($(strip $(wildcard ${.INCLUDE_DIRS}/github.com/matthewmueller/make/all.mk)),)
-	i := $(shell >&2 echo "installing github.com/matthewmueller/make..." && curl -sL https://git.io/fjD5i | sh)
-endif
-include github.com/matthewmueller/make/all.mk
+test: format
+	@ ./node_modules/.bin/vitest run --coverage
 
-precommit: rollup.compile tsc.check
-prepublish: clean.dist rollup.compile tsc.check
+format:
+	@ ./node_modules/.bin/prettier --write src
 
-clean.dist:
-	@ rm -rf dist
+build: test
+	@ ./node_modules/.bin/tsup
 
-rollup.compile:
-	@ ./node_modules/.bin/rollup -c
+precommit: test
 
-rollup.watch:
-	@ ./node_modules/.bin/rollup -c -w
-
-tsc.check:
-	@ ./node_modules/.bin/tsc
-
-serve:
-	@ ./node_modules/.bin/serve
-
-publish: prepublish bin.npm bin.node bin.jq env.NPM_TOKEN
-	@ echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
-	@ cp package.json dist/
-	@ if [ $(shell npm info --json $(shell jq -r '.name' < package.json) version) != $(shell jq .version < package.json) ]; then \
-			PUBLISH=1 npm publish dist/; \
-		fi
-	@ rm dist/package.json
-	@ rm .npmrc
+release: VERSION := $(shell awk '/[0-9]+\.[0-9]+\.[0-9]+/ {print $$2; exit}' Changelog.md)
+release: format test build
+	@ test -n "$(VERSION)" || (echo "Unable to read the version." && false)
+	@ test -z "`git tag -l v$(VERSION)`" || (echo "Aborting because the v$(VERSION) tag already exists." && false)
+	@ test -z "`git status --porcelain | grep -vE 'Changelog\.md'`" || (echo "Aborting from uncommitted changes." && false)
+	@ git add Changelog.md
+# 	@ git commit -m "Release v$(VERSION)"
+# 	@ git tag "v$(VERSION)"
+# 	@ git push origin main "v$(VERSION)"
+# 	@ go run github.com/cli/cli/v2/cmd/gh@latest release create --generate-notes "v$(VERSION)"
