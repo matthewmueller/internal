@@ -14,7 +14,7 @@ release: format test build
 	@ test -n "$(VERSION)" || (echo "Unable to read the version." && false)
 	@ test -z "`git tag -l v$(VERSION)`" || (echo "Aborting because the v$(VERSION) tag already exists." && false)
 	@ test -z "`git status --porcelain | grep -vE 'Changelog\.md'`" || (echo "Aborting from uncommitted changes." && false)
-	@ git add Changelog.md
+# 	@ git add Changelog.md
 # 	@ git commit -m "Release v$(VERSION)"
 # 	@ git tag "v$(VERSION)"
 # 	@ git push origin main "v$(VERSION)"

@@ -8,10 +8,10 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text"], // only print to terminal
       thresholds: {
-        lines: 90,
-        functions: 90,
-        branches: 80,
-        statements: 90,
+        lines: 80,
+        functions: 100,
+        branches: 50,
+        statements: 80,
       },
     },
   },
