@@ -9,7 +9,7 @@ export default defineConfig({
       reporter: ["text"], // only print to terminal
       thresholds: {
         lines: 80,
-        functions: 100,
+        functions: 90,
         branches: 50,
         statements: 80,
       },

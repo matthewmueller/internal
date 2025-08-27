@@ -1,8 +1,11 @@
-test: format
-	@ ./node_modules/.bin/vitest run --coverage
+watch:
+	@ ./node_modules/.bin/vitest --coverage
 
 format:
 	@ ./node_modules/.bin/prettier --write src
+
+test: format
+	@ ./node_modules/.bin/vitest run --coverage
 
 build: test
 	@ ./node_modules/.bin/tsup
@@ -20,3 +23,4 @@ release: format test build
 # 	@ git tag "v$(VERSION)"
 # 	@ git push origin main "v$(VERSION)"
 # 	@ go run github.com/cli/cli/v2/cmd/gh@latest release create --generate-notes "v$(VERSION)"
+#   @ PUBLISH=1 npm publish
