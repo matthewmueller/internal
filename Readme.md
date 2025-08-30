@@ -12,7 +12,7 @@ npm install internal
 
 ## Usage
 
-A few examples below but see the [src directory](./src) for each module.
+A few examples below but see the [src/](./src) directory for the list of modules and the tests for usage.
 
 ### maybe
 
