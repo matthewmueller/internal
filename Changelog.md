@@ -1,3 +1,8 @@
+# 3.0.1 / 2025-08-30
+
+- write readme
+- start dist/ fresh every time we build
+
 # 3.0.0 / 2025-08-30
 
 - modernize the build system and cleanup no longer relevant packages
