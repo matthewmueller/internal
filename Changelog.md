@@ -1,3 +1,7 @@
+# 3.0.3 / 2025-08-30
+
+- add package-lock.json too
+
 # 3.0.2 / 2025-08-30
 
 - test publishing pipeline
