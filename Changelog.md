@@ -1,3 +1,7 @@
+# 3.0.0 / 2025-08-30
+
+- modernize the build system and cleanup no longer relevant packages
+
 # 2.0.26 / 2020-03-15
 
 - switch to npm
