@@ -26,10 +26,10 @@ release: format test build
 	@ test -z "`git tag -l v$(VERSION)`" || (echo "Aborting because the v$(VERSION) tag already exists." && false)
 	@ test -z "`git status --porcelain | grep -vE 'Changelog\.md'`" || (echo "Aborting from uncommitted changes." && false)
 	@ test -n "`git status --porcelain Changelog.md`" || (echo "Aborting because Changelog.md has not changed." && false)
-	@ git add Changelog.md
+	@ npm version "$(VERSION)"
+	@ git add Changelog.md package.json
 	@ git commit -m "Release v$(VERSION)"
 	@ git tag "v$(VERSION)"
 	@ git push origin main "v$(VERSION)"
 	@ go run github.com/cli/cli/v2/cmd/gh@latest release create --generate-notes "v$(VERSION)"
-	@ npm version "$(VERSION)"
 	@ PUBLISH=1 npm publish
