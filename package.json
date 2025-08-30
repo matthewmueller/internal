@@ -1,7 +1,7 @@
 {
   "name": "internal",
   "version": "3.0.0",
-  "description": "Browser toolbox for building robust applications",
+  "description": "Well-tested browser modules for robust applications",
   "keywords": [],
   "scripts": {
     "test": "make test",

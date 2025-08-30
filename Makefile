@@ -7,6 +7,13 @@ format:
 test: format
 	@ ./node_modules/.bin/vitest run --coverage
 
+install:
+	@ npm install
+	@ ./node_modules/.bin/playwright install
+
+clean:
+	@ rm -rf node_modules dist
+
 build: test
 	@ ./node_modules/.bin/tsup
 
@@ -18,9 +25,9 @@ release: format test build
 	@ test -z "`git tag -l v$(VERSION)`" || (echo "Aborting because the v$(VERSION) tag already exists." && false)
 	@ test -z "`git status --porcelain | grep -vE 'Changelog\.md'`" || (echo "Aborting from uncommitted changes." && false)
 	@ test -n "`git status --porcelain Changelog.md`" || (echo "Aborting because Changelog.md has not changed." && false)
-# 	@ git add Changelog.md
-# 	@ git commit -m "Release v$(VERSION)"
-# 	@ git tag "v$(VERSION)"
-# 	@ git push origin main "v$(VERSION)"
-# 	@ go run github.com/cli/cli/v2/cmd/gh@latest release create --generate-notes "v$(VERSION)"
-#   @ PUBLISH=1 npm publish
+	@ git add Changelog.md
+	@ git commit -m "Release v$(VERSION)"
+	@ git tag "v$(VERSION)"
+	@ git push origin main "v$(VERSION)"
+	@ go run github.com/cli/cli/v2/cmd/gh@latest release create --generate-notes "v$(VERSION)"
+  @ PUBLISH=1 npm publish
