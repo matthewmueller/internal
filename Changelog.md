@@ -1,3 +1,7 @@
+# 3.0.2 / 2025-08-30
+
+- test publishing pipeline
+
 # 3.0.1 / 2025-08-30
 
 - write readme
