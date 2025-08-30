@@ -15,6 +15,7 @@ clean:
 	@ rm -rf node_modules dist
 
 build: test
+	@ rm -rf dist
 	@ ./node_modules/.bin/tsup
 
 precommit: test
