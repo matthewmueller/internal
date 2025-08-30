@@ -27,7 +27,7 @@ release: format test build
 	@ test -z "`git status --porcelain | grep -vE 'Changelog\.md'`" || (echo "Aborting from uncommitted changes." && false)
 	@ test -n "`git status --porcelain Changelog.md`" || (echo "Aborting because Changelog.md has not changed." && false)
 	@ npm version "$(VERSION)" --no-git-tag-version
-	@ git add Changelog.md package.json
+	@ git add Changelog.md package.json package-lock.json
 	@ git commit -m "Release v$(VERSION)"
 	@ git tag "v$(VERSION)"
 	@ git push origin main "v$(VERSION)"
