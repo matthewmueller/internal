@@ -31,4 +31,5 @@ release: format test build
 	@ git tag "v$(VERSION)"
 	@ git push origin main "v$(VERSION)"
 	@ go run github.com/cli/cli/v2/cmd/gh@latest release create --generate-notes "v$(VERSION)"
+	@ npm version "$(VERSION)"
 	@ PUBLISH=1 npm publish
