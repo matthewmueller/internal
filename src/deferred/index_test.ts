@@ -1,8 +1,6 @@
 import { describe, it, assert } from "vitest"
 import Deferred from "./"
 
-new Promise(function () {})
-
 describe("deferred", () => {
   it("should resolve", async () => {
     const deferred = new Deferred()
